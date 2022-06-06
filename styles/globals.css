@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/Manrope-Medium.ttf");
+  }
+  @font-face {
+    font-family: "Sempione";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/SempioneGrotesk-ExtraBold.ttf");
+  }
+}
+
+body {
+  @apply text-zinc-700;
+  min-height: 100vh;
+}
+
+div#__next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
