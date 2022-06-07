@@ -62,7 +62,7 @@ const ProductPage = () => {
                   </p>
                 </button>
               </div>
-              <button className="bg-green-500 hover:bg-green-600 active:bg-green-700 focus:ring focus:ring-green-300 text-zinc-50 px-2 rounded-md w-full p-4 mt-4">
+              <button className="bg-green-500 hover:bg-green-600 active:bg-green-700 focus:ring focus:ring-green-200 text-zinc-50 px-2 rounded-md w-full p-4 mt-4">
                 Add to cart
               </button>
             </form>

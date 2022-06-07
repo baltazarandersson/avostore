@@ -19,7 +19,6 @@
 
 body {
   @apply text-zinc-700;
-  min-height: 100vh;
 }
 
 div#__next {
@@ -28,4 +27,11 @@ div#__next {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+div#__next > div:first-child {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

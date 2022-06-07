@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <>
       <div className="min-h-screen">
-        <div className="h-full w-full px-24 py-12">
+        <div className="h-full w-full px-0 sm:px-24 py-12">
           <ProductWrapper productList={productList} />
         </div>
       </div>
