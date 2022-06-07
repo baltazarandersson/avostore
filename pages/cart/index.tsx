@@ -6,7 +6,7 @@ const Cart = () => {
 
   return (
     <div className="h-full w-full px-12 sm:px-24 py-12 gap-8 grow flex flex-col">
-      <div className="flex gap-4 items-center">
+      {/* <div className="flex gap-4 items-center">
         <h2 className="text-4xl font-sempione">My cart</h2>
         <p className="text-xl font-semibold text-zinc-400">
           - {itemsCount} item/s
@@ -33,7 +33,7 @@ const Cart = () => {
             You will need to add some items to the cart before you can checkout.
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
