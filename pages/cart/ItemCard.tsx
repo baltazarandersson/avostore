@@ -8,6 +8,10 @@ type ProductType = {
 const ItemCard = ({ product }: ProductType) => {
   const { removeFromCart } = useCartMutations();
 
+  if (product === undefined) {
+    return <div></div>;
+  }
+
   return (
     <li className="w-full flex justify-between items-center px-8 bg-zinc-50 h-20 rounded-xl hover:shadow-md hover:-translate-y-1 duration-200">
       <Link href={`product/${product.id}`}>
