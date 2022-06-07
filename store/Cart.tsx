@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { Dispatch, useContext, useReducer } from "react";
 
 export type CartState = {
   [key: string]: CartItemType;
@@ -13,7 +13,9 @@ export type CartAction = {
 const defaultState = {} as CartState;
 
 const CartItemsContext = React.createContext(defaultState);
-const CartDispatchContext = React.createContext();
+const CartDispatchContext = React.createContext(
+  (() => {}) as Dispatch<CartAction>
+);
 
 export type CartItemType = TProduct & { quantity: number };
 
@@ -78,13 +80,13 @@ function cartReducers(
 
 export const useCartMutations = () => {
   const dispatch = useContext(CartDispatchContext);
-  const state = useContext(CartItemsContext);
-  console.log(state);
 
-  function addToCart(product: TProduct, quantity?: number) {
+  function addToCart(product: TProduct | undefined, quantity?: number) {
+    const newProduct = product as TProduct;
+
     dispatch({
       type: "add",
-      item: product,
+      item: newProduct,
       quantity,
     });
   }

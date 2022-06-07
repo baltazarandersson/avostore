@@ -7,10 +7,16 @@ const avoDetail = async (req: NextApiRequest, res: NextApiResponse) => {
     const { id } = req.query;
     const entry = await db.getById(id as string);
     res.status(200).json(entry);
-  } catch (e) {
-    res.status(404).json({
-      message: e.message,
-    });
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(404).json({
+        message: err.message,
+      });
+    } else {
+      res.status(404).json({
+        message: "Unexpected Error",
+      });
+    }
   }
 };
 export default avoDetail;

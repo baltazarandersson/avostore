@@ -1,7 +1,11 @@
 import { useCartMutations } from "@store/Cart";
 import Link from "next/link";
 
-const ItemCard = ({ product }) => {
+type ProductType = {
+  product: TProduct & { quantity: number };
+};
+
+const ItemCard = ({ product }: ProductType) => {
   const { removeFromCart } = useCartMutations();
 
   return (
