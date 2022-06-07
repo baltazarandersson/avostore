@@ -83,7 +83,6 @@ export const useCartMutations = () => {
 
   function addToCart(product: TProduct | undefined, quantity?: number) {
     const newProduct = product as TProduct;
-
     dispatch({
       type: "add",
       item: newProduct,
