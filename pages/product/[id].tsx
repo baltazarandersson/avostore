@@ -7,8 +7,6 @@ const selectedOptionStyles = "border-green-500 bg-green-50 cursor-default";
 const defaultOptionStyles = "border-zinc-200 hover:bg-green-50";
 
 export const getStaticPaths = async () => {
-  console.log("a");
-
   const response = await fetch("https://avostore-baltazar.vercel.app/api/avo");
   const { data }: TAPIAvoResponse = await response.json();
 
@@ -17,8 +15,6 @@ export const getStaticPaths = async () => {
       id,
     },
   }));
-  console.log(paths);
-
   return {
     paths,
     fallback: false,
@@ -26,16 +22,12 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log(params);
-
   const id = params?.id as string;
   const response = await fetch(
     `https://avostore-baltazar.vercel.app/api/avo/${id}`
   );
 
   const product: TProduct = await response.json();
-  console.log(product);
-
   return {
     props: {
       product,
