@@ -1,14 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { useCartMutations } from "@store/Cart";
+import { GetStaticProps } from "next";
 
 const defaultAmount = 6;
 const selectedOptionStyles = "border-green-500 bg-green-50 cursor-default";
 const defaultOptionStyles = "border-zinc-200 hover:bg-green-50";
 
-const ProductPage = () => {
-  const { query } = useRouter();
-  const [product, setProduct] = useState<TProduct>();
+export const getStaticPaths = async () => {
+  console.log("a");
+
+  const response = await fetch("https://avostore-baltazar.vercel.app/api/avo");
+  const { data }: TAPIAvoResponse = await response.json();
+
+  const paths = data.map(({ id }) => ({
+    params: {
+      id,
+    },
+  }));
+  console.log(paths);
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  console.log(params);
+
+  const id = params?.id as string;
+  const response = await fetch(
+    `https://avostore-baltazar.vercel.app/api/avo/${id}`
+  );
+
+  const product: TProduct = await response.json();
+  console.log(product);
+
+  return {
+    props: {
+      product,
+    },
+  };
+};
+
+const ProductPage = ({ product }: { product: TProduct }) => {
   const [selectedAmount, setAmount] = useState<number>(defaultAmount);
   const { addToCart } = useCartMutations();
 
@@ -19,15 +54,6 @@ const ProductPage = () => {
   function handleAddToCart() {
     addToCart(product, selectedAmount);
   }
-
-  useEffect(() => {
-    if (query.id) {
-      window
-        .fetch(`/api/avo/${query.id}`)
-        .then((response) => response.json())
-        .then((product) => setProduct(product));
-    }
-  }, [query.id]);
 
   return (
     <>
