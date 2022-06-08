@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import ProductWrapper from "@components/ProductWrapper/ProductWrapper";
 
-const HomePage = () => {
-  const [productList, setProducts] = useState<TProduct[]>([]);
+export const getServerSideProps = async () => {
+  const response = await fetch("http://localhost:3000/api/avo");
+  const { data: productList }: TAPIAvoResponse = await response.json();
 
-  useEffect(() => {
-    window
-      .fetch("/api/avo")
-      .then((response) => response.json())
-      .then(({ data, length }) => setProducts(data));
-  }, []);
+  return {
+    props: {
+      productList,
+    },
+  };
+};
 
+const HomePage = ({ productList }: { productList: TProduct[] }) => {
   return (
     <>
       <div className="min-h-screen">
